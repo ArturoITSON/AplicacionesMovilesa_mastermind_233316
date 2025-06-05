@@ -1,0 +1,50 @@
+/**
+ * Practica 01: MasterMind
+ * Nombre: Sergio Arturo Garcia Ramirez
+ * ID: 00000233316
+ */
+
+data class Evaluacion (val posicionExacta: Int, val posicionIncorrecta: Int)
+
+
+fun main() {
+    
+    println(evaluar("ABCD", "ABCD") == Evaluacion(4,0))
+    println(evaluar("ABCD", "CDBA") == Evaluacion(0,4))
+    println(evaluar("ABCD", "ABDC") == Evaluacion(2,2))
+    println(evaluar("AABC", "ADFE") == Evaluacion(1,0))
+    println(evaluar("AABC", "DEAA") == Evaluacion(0,2))
+
+  
+    
+}
+
+
+fun evaluar(secret: String, guess: String): Evaluacion{
+    var posicionExacta = 0
+    var posicionIncorrecta = 0
+    
+    var letraRepetida: Char? = null
+    
+    for((e, index) in secret.withIndex()){
+        if(index.equals(guess.elementAt(e))){
+            posicionExacta++
+            letraRepetida = index
+            
+        }
+        else{
+           // println(index)
+            if(guess.contains(index) &&  letraRepetida != index)
+            posicionIncorrecta++
+        }
+    }
+    print(posicionExacta)
+    print("-")
+    print(posicionIncorrecta)
+    print(" ")
+    
+    
+    return Evaluacion(posicionExacta, posicionIncorrecta)
+    
+}
+
